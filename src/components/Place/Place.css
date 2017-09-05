@@ -1,0 +1,147 @@
+.place {
+  align-items: center;
+  background: #40A7E9;
+  color: #fff;
+  display: flex;
+  margin: 0 0 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.place-inner-item {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.place-inner-item:not(:last-child):after {
+  content: '';
+  background: rgba(242,251,251,0.3);
+  height: 300%;
+  position: absolute;
+  right: 0;
+  top: -100%;
+  width: 1px;
+}
+
+.place-icon {
+  border-color: transparent;
+  flex: inherit;
+}
+
+.place-name {
+  flex: 2;
+}
+
+.place-update {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 31px;
+  margin: 0;
+  position: relative;
+  width: 31px;
+}
+
+.place-remove {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 31px;
+  margin: 0;
+  position: relative;
+  width: 31px;
+}
+
+.place-remove:after,
+.place-remove:before {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 7px;
+  position: absolute;
+  top: 14px;
+  transform: rotate(45deg);
+  width: 15px;
+}
+
+.place-remove:after {
+  top: 7px;
+  left: 14px;
+  width: 1px;
+  height: 15px;
+}
+
+.place-icon {
+  font-size: 30px;
+}
+
+.place-icon-update {
+  animation: rotateRefresh 1s infinite linear;
+  animation-play-state: paused;
+  border-color: #fff #fff #fff transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 31px;
+  position: relative;
+  transform-origin: 50% 50%;
+  transition: background-color 0.3s ease-in-out;
+  width: 31px;
+}
+
+.place-icon-update:hover {
+  animation-play-state: running;
+}
+
+.place-icon-update-arrow {
+  border-color: transparent #fff transparent;
+  border-style: solid;
+  border-width: 5px 10px 5px 0;
+  left: -3px;
+  position: absolute;
+  top: 20px;
+  transform: rotate(25deg);
+}
+
+.place-empty {
+  font-style: italic;
+  text-align: center;
+  text-shadow: 0 1px 1px #000;
+}
+
+.fade-enter,
+.fade-appear {
+  opacity: 0;
+}
+
+.fade-enter.fade-enter-active,
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes rotateRefresh {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,46 @@
+.app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-title {
+  text-shadow: 0 1px 1px #000;
+}
+
+.app-content {
+  color: #fff;
+  margin: 0 auto 50px;
+  min-width: 320px;
+  width: 65%;
+  text-align: center;
+}
+
+.app-header {
+  border-bottom: 1px solid rgba(255,255,255,0.26);
+  border-top: 1px solid rgba(0,0,0,0.36);
+  margin: 40px auto;
+}
+
+.app-header-inner {
+  border-bottom: 1px solid rgba(0,0,0,0.36);
+  border-top: 1px solid rgba(255,255,255,0.26);
+  position: relative;
+}
+
+.app-logo-wrapper {
+  left: 0;
+  position: absolute;
+  top: 12%;
+}
+
+.app-logo {
+  animation: spin infinite 20s linear;
+  height: 54px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
