@@ -12,8 +12,10 @@ export default class SearchBar extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let place = this.state.place.trim();
-    this.props.addPlace('', place);
-    this.setState({place: ''});
+    if (place) {
+      this.props.addPlace('', place);
+      this.setState({place: ''});
+    }
   }
 
   handlePlaceChange(event) {

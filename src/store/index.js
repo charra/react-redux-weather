@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import { getStorage } from '../utils/storage';
 import rootReducer from '../reducers';
 
-const initialState = getStorage('places') ? getStorage('places') : {loading: false, error: false, places: {}};
+const initialState = getStorage('places') ? getStorage('places') : {loading: false, places: {}}
+initialState.error = false
 
 const configureStore = () => {
   const store = createStore(

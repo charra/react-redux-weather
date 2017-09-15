@@ -15,14 +15,16 @@ function showErrorMessage() {
 
 function getLocation() {
   let position = new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+    navigator.geolocation.getCurrentPosition(resolve, reject)
   })
-  return (dispatch, getState) => {
+  return (dispatch) => {
     position.then(
       (pos) => {
-        dispatch(getPlaceWeather(pos))
+        return dispatch(getPlaceWeather(pos))
       },
-        dispatch(getMyLocationfromIP())
+      () => {
+        return dispatch(getMyLocationfromIP())
+      }
     ); 
   };
 }
@@ -36,9 +38,9 @@ function getMyLocationfromIP() {
       .then((IpInfo) => {
         dispatch(getPlaceWeather(IpInfo.city))
       })
-      .catch(() => dispatch(showErrorMessage()))
+      .then(() => updateStorage('places', getState()))
     )
-    .then(() => updateStorage('places', getState()))    
+    .catch(() => dispatch(showErrorMessage()))
   }
 }
 
@@ -61,7 +63,6 @@ function getPlaceWeather(pos) {
       .then(() => updateStorage('places', getState()))
       .catch(() => dispatch(showErrorMessage()))
     )
-    .then(() => updateStorage('places', getState()))    
   }
 }
 
@@ -78,9 +79,14 @@ export function setLoading() {
 
 export function addPlace(getMyLocation, city) {
   if (getMyLocation) {
-    return (dispatch) => dispatch(getLocation());
+    return (dispatch) => dispatch(getLocation())
   }
-  else return (dispatch) => dispatch(getPlaceWeather(city));
+  else if (!getMyLocation && city) {
+    return (dispatch) => dispatch(getPlaceWeather(city))
+  }
+  else if (!getMyLocation && !city) {
+    return
+  }
 }
 
 export function removePlaceById(id) {
@@ -89,15 +95,13 @@ export function removePlaceById(id) {
       type: REMOVE_PLACE,
       id,
     }))
-    .catch(dispatch(showErrorMessage()))
-      .then(() => updateStorage('places', getState()))
+    .then(() => updateStorage('places', getState()))
   };
 }
 
 export function removePlace(id) {
   return (dispatch, getState) => {
     return dispatch(removePlaceById(id))
-      .then(() => updateStorage('places', getState()));
   };
 }
 
